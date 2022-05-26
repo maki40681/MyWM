@@ -1,3 +1,5 @@
+#define ICONSIZE 20
+#define ICONSPACING 5
 #define MODKEY Mod4Mask
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define TAGKEYS(KEY,TAG) \
