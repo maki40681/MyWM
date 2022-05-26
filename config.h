@@ -9,6 +9,7 @@
 static const int topbar             = 1;
 static const int showbar            = 1;
 static const int nmaster	    = 1;
+static const int user_bh            = 24;
 static const int resizehints	    = 0;
 static const int lockfullscreen	    = 1;
 
