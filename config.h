@@ -8,24 +8,29 @@
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-static const int topbar             = 1;
-static const int showbar            = 1;
-static const int nmaster	    = 1;
-static const int user_bh            = 24;
-static const int resizehints	    = 0;
-static const int lockfullscreen	    = 1;
+static const int topbar			  = 1;
+static const int showbar            	  = 1;
+static const int nmaster	    	  = 1;
+static const int user_bh            	  = 24;
+static const int showsystray        	  = 1;
+static const int resizehints	    	  = 0;
+static const int lockfullscreen	    	  = 1;
+static const int systraypinningfailfirst  = 1;
 
-static const unsigned int snap      = 0;
-static const unsigned int borderpx  = 3;
+static const unsigned int snap		  = 0;
+static const unsigned int borderpx	  = 3;
+static const unsigned int systrayonleft	  = 0;
+static const unsigned int systraypinning  = 0;
+static const unsigned int systrayspacing  = 5;
 
-static const float mfact	    = 0.55;
+static const float mfact		  = 0.55;
 
-static const char col_cyan[]        = "#d3d0c8";
-static const char col_gray1[]       = "#15171c";
-static const char col_gray2[]       = "#15171c";
-static const char col_gray3[]       = "#d3d0c8";
-static const char col_gray4[]       = "#15171c";
-static const char *colors[][3]      = {
+static const char col_cyan[]		  = "#d3d0c8";
+static const char col_gray1[]       	  = "#15171c";
+static const char col_gray2[]       	  = "#15171c";
+static const char col_gray3[]       	  = "#d3d0c8";
+static const char col_gray4[]       	  = "#15171c";
+static const char *colors[][3] = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
