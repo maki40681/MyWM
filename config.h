@@ -129,7 +129,7 @@ static Key keys[] = {
 };
 
 static Button buttons[] = {
-	{ ClkLtSymbol,          0,              Button1,        setlayout,	{.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button1,        cyclelayout,	{.i = -1 } },
 	{ ClkLtSymbol,          0,              Button2,        killclient,	{0} },
 	{ ClkLtSymbol,          0,              Button3,        focusstack,	{.i = +1 } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
