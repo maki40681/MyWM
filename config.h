@@ -68,8 +68,8 @@ static const Rule rules[] = {
 
 static const Layout layouts[] = {
 	{ "[]=",      tile },
-	{ "><>",      NULL },
 	{ "[M]",      monocle },
+	{ NULL,       NULL },
 };
 
 static Key keys[] = {
@@ -96,6 +96,8 @@ static Key keys[] = {
 	{ MODKEY,                     	XK_k,			    focusstack,		{.i = -1 } },
 	{ MODKEY,                     	XK_i,			    incnmaster,		{.i = +1 } },
 	{ MODKEY,                     	XK_d,			    incnmaster,		{.i = -1 } },
+	{ MODKEY,			XK_Left,                    cyclelayout,        {.i = +1 } },
+	{ MODKEY,			XK_Right,                   cyclelayout,        {.i = -1 } },
 	{ MODKEY,                     	XK_0,			    view,		{.ui = ~0 } },
 	{ MODKEY,                     	XK_h,			    setmfact,		{.f = -0.05} },
 	{ MODKEY,                     	XK_l,			    setmfact,		{.f = +0.05} },
