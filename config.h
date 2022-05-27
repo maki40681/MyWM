@@ -72,6 +72,18 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
+static const char sxiv[] = "xsetroot -name fsignal:2; \
+			    sxiv -A 60 -s F $(find /home/triplek/MEGA/WallHaven -type f -printf \"%T+\t%p\n\" \
+			    | sort -r \
+			    | awk '{print $2}') -t; \
+			    xsetroot -name fsignal:2";
+
+static const char vixs[] = "xsetroot -name fsignal:2; \
+			    sxiv -A 60 -s F $(find /home/triplek/MEGA/wallhaven -type f -printf \"%T+\t%p\n\" \
+			    | sort -r \
+			    | awk '{print $2}') -t; \
+			    xsetroot -name fsignal:2";
+
 static Key keys[] = {
 	{ 0,				XF86XK_AudioPrev,	    spawn,		SHCMD("playerctl prev") },
 	{ 0,				XF86XK_AudioNext,           spawn,		SHCMD("playerctl next") },
@@ -105,6 +117,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_q,			    spawn,		SHCMD("skippy-xd") },
 	{ MODKEY,			XK_space,		    spawn,		SHCMD("dmenu_run -h 24 -p \"debian  \"") },
 
+	{ Mod1Mask,			XK_w,			    spawn,		SHCMD(sxiv) },
+	{ Mod1Mask,			XK_a,			    spawn,		SHCMD(vixs) },
+
 	{ MODKEY|ShiftMask,           	XK_Return,		    zoom,		{0} },
 	{ MODKEY|ShiftMask,             XK_s,			    togglesticky,	{0} },
 	{ MODKEY|ShiftMask,             XK_Up,			    togglealwaysontop,	{0} },
@@ -113,7 +128,12 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_l,			    spawn,		SHCMD("slock") },
 	{ MODKEY|ShiftMask,		XK_q,			    spawn,		SHCMD("say logout") },
 	{ MODKEY|ShiftMask,		XK_b,			    spawn,		SHCMD("qutebrowser") },
-
+	{ MODKEY|ShiftMask,		XK_n,			    spawn,		SHCMD("jpg2ff < ~/MEGA/WallHaven/`ls ~/MEGA/WallHaven \
+											      | shuf -n 1` > ~/.cache/st_bg.ff; \
+											      say refstbg; pidof st | xargs kill -s USR1") },
+	{ MODKEY|ShiftMask,		XK_m,			    spawn,		SHCMD("jpg2ff < ~/MEGA/wallhaven/`ls ~/MEGA/wallhaven \
+											      | shuf -n 1` > ~/.cache/st_bg.ff; \
+											      say refstbg; pidof st | xargs kill -s USR1") },
 	{ MODKEY|ControlMask,		XK_Print,		    spawn,		SHCMD("flameshot gui") }, 
 	{ MODKEY|ControlMask,	      	XK_Return,		    spawn,		SHCMD("say tmux; st -e tmux attach -t TMUX") },
 
