@@ -242,6 +242,7 @@ static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
+static void togglecenter(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglealwaysontop(const Arg *arg);
 static void togglesticky(const Arg *arg);
@@ -2114,6 +2115,20 @@ togglebar(const Arg *arg)
 		XConfigureWindow(dpy, systray->win, CWY, &wc);
 	}
 	arrange(selmon);
+}
+
+void
+togglecenter(const Arg *arg)
+{
+        if (!selmon->sel)
+                return;
+        if (selmon->sel->isfullscreen)
+                return;
+
+        selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
+        selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
+
+        arrange(selmon);
 }
 
 void
