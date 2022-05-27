@@ -46,6 +46,12 @@ static const char *fonts[] = {
 	"JoyPixels:size=12:antialias=true:autohint=true",
 };
 
+static const char *const autostart[] = {
+	"lead", NULL,
+	"dwmblocks", NULL,
+	NULL
+};
+
 static const char *tags[] = { "", "", "", "", "", "","", "", "" };
 
 static const Rule rules[] = {
