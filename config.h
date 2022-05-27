@@ -106,12 +106,12 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,		    spawn,		SHCMD("dmenu_run -h 24 -p \"debian  \"") },
 
 	{ MODKEY|ShiftMask,           	XK_Return,		    zoom,		{0} },
-	{ MODKEY|ShiftMask,		XK_q,			    quit,		{0} },
 	{ MODKEY|ShiftMask,             XK_s,			    togglesticky,	{0} },
 	{ MODKEY|ShiftMask,             XK_Up,			    togglealwaysontop,	{0} },
 	{ MODKEY|ShiftMask,		XK_r,			    quit,		{1} },
 	{ MODKEY|ShiftMask,           	XK_0,			    tag,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_l,			    spawn,		SHCMD("slock") },
+	{ MODKEY|ShiftMask,		XK_q,			    spawn,		SHCMD("say logout") },
 	{ MODKEY|ShiftMask,		XK_b,			    spawn,		SHCMD("qutebrowser") },
 
 	{ MODKEY|ControlMask,		XK_Print,		    spawn,		SHCMD("flameshot gui") }, 
