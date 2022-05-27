@@ -94,6 +94,7 @@ static Key keys[] = {
 
 	{ MODKEY|ShiftMask,           	XK_Return,		    zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_q,			    quit,		{0} },
+	{ MODKEY|ShiftMask,             XK_Up,			    togglealwaysontop,	{0} },
 	{ MODKEY|ShiftMask,		XK_r,			    quit,		{1} },
 	{ MODKEY|ShiftMask,           	XK_0,			    tag,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_l,			    spawn,		SHCMD("slock") },
