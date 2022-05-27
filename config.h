@@ -138,3 +138,8 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
+static Signal signals[] = {
+  { 1,  quit,             {0} },
+  { 2,  cyclelayout,      {.i = -1 } },
+};
