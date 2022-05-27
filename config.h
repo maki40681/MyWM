@@ -18,6 +18,7 @@ static const int lockfullscreen	    	  = 1;
 static const int systraypinningfailfirst  = 1;
 
 static const unsigned int snap		  = 0;
+static const unsigned int gappx		  = 7.5;
 static const unsigned int borderpx	  = 3;
 static const unsigned int systrayonleft	  = 0;
 static const unsigned int systraypinning  = 0;
