@@ -72,17 +72,17 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
-static const char sxiv[] = "xsetroot -name fsignal:2; \
+static const char sxiv[] = "xsetroot -name fsignal:3; \
 			    sxiv -A 60 -s F $(find /home/triplek/MEGA/WallHaven -type f -printf \"%T+\t%p\n\" \
 			    | sort -r \
 			    | awk '{print $2}') -t; \
-			    xsetroot -name fsignal:2";
+			    xsetroot -name fsignal:3";
 
-static const char vixs[] = "xsetroot -name fsignal:2; \
+static const char vixs[] = "xsetroot -name fsignal:3; \
 			    sxiv -A 60 -s F $(find /home/triplek/MEGA/wallhaven -type f -printf \"%T+\t%p\n\" \
 			    | sort -r \
 			    | awk '{print $2}') -t; \
-			    xsetroot -name fsignal:2";
+			    xsetroot -name fsignal:3";
 
 static Key keys[] = {
 	{ 0,				XF86XK_AudioPrev,	    spawn,		SHCMD("playerctl prev") },
@@ -163,5 +163,6 @@ static Button buttons[] = {
 
 static Signal signals[] = {
   { 1,  quit,             {0} },
-  { 2,  cyclelayout,      {.i = -1 } },
+  { 2,  quit,		  {1} },
+  { 3,  cyclelayout,      {.i = -1 } },
 };
