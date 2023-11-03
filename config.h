@@ -18,7 +18,7 @@ static const int lockfullscreen	    	  = 1;
 static const int systraypinningfailfirst  = 1;
 
 static const unsigned int snap		  = 0;
-static const unsigned int gappx		  = 7;
+static const unsigned int gappx		  = 10;
 static const unsigned int borderpx	  = 3;
 static const unsigned int systrayonleft	  = 0;
 static const unsigned int systraypinning  = 0;
@@ -27,10 +27,10 @@ static const unsigned int systrayspacing  = 5;
 static const float mfact		  = 0.55;
 
 static const char col_cyan[]		  = "#d3d0c8";
-static const char col_gray1[]       	  = "#15171c";
-static const char col_gray2[]       	  = "#15171c";
+static const char col_gray1[]       	  = "#2d2d2d";
+static const char col_gray2[]       	  = "#747369";
 static const char col_gray3[]       	  = "#d3d0c8";
-static const char col_gray4[]       	  = "#15171c";
+static const char col_gray4[]       	  = "#2d2d2d";
 static const char *colors[][3] = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
@@ -40,10 +40,10 @@ static const XPoint stickyiconbb = {4,8};
 static const XPoint stickyicon[] = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} };
 
 static const char *fonts[] = {
-	"Product Sans Medium:size=11:antialias=true:autohint=true",
-	"Font Awesome 5 Brands:size=12:antialias=true:autohint=true",
-	"Font Awesome 5 Free Solid:size=12:antialias=true:autohint=true",
-	"FantasqueSansMono Nerd Font:size=12:antialias=true:autohint=true",
+	"Product Sans:size=11:antialias=true:autohint=true",
+	"Font Awesome 6 Brands Regular:size=12:antialias=true:autohint=true",
+	"Font Awesome 6 Free Solid:size=12:antialias=true:autohint=true",
+	"FantasqueSansM Nerd Font:size=12:antialias=true:autohint=true",
 	"JoyPixels:size=12:antialias=true:autohint=true",
 };
 
@@ -53,16 +53,15 @@ static const char *const autostart[] = {
 	NULL
 };
 
-static const char *tags[] = { "", "", "", "", "", "","", "", "" };
+static const char *tags[] = { " ", "", "", "", "", "   ","", "", "  " };
 
 static const Rule rules[] = {
-	{ "qutebrowser",	  NULL,	  NULL,	  1 << 1,   0,  -1 },
+	{ "Firefox-esr",	  NULL,	  NULL,   1 << 1,   0,  -1 },
 	{ "Zathura",		  NULL,	  NULL,   1 << 2,   0,  -1 },
 	{ "Master PDF Editor 5",  NULL,	  NULL,   1 << 2,   0,  -1 },
 	{ "mpv",		  NULL,	  NULL,   1 << 3,   0,  -1 },
 	{ "discord",		  NULL,	  NULL,   1 << 4,   0,  -1 },
 	{ "TelegramDesktop",	  NULL,	  NULL,   1 << 5,   0,  -1 },
-	{ "Minecraft* 1.18.2",	  NULL,	  NULL,   1 << 6,   0,  -1 },
 	{ "Gimp",		  NULL,	  NULL,   1 << 7,   0,  -1 },
 };
 
@@ -71,18 +70,6 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ NULL,       NULL },
 };
-
-static const char sxiv[] = "xsetroot -name fsignal:3; \
-			    sxiv -A 60 -s F $(find /home/triplek/MEGA/WallHaven -type f -printf \"%T+\t%p\n\" \
-			    | sort -r \
-			    | awk '{print $2}') -t; \
-			    xsetroot -name fsignal:3";
-
-static const char vixs[] = "xsetroot -name fsignal:3; \
-			    sxiv -A 60 -s F $(find /home/triplek/MEGA/wallhaven -type f -printf \"%T+\t%p\n\" \
-			    | sort -r \
-			    | awk '{print $2}') -t; \
-			    xsetroot -name fsignal:3";
 
 static Key keys[] = {
 	{ 0,				XF86XK_AudioPrev,	    spawn,		SHCMD("playerctl prev") },
@@ -117,8 +104,6 @@ static Key keys[] = {
 	{ MODKEY,			XK_q,			    spawn,		SHCMD("skippy-xd") },
 	{ MODKEY,			XK_space,		    spawn,		SHCMD("dmenu_run -h 24 -p \"debian  \"") },
 
-	{ Mod1Mask,			XK_w,			    spawn,		SHCMD(sxiv) },
-	{ Mod1Mask,			XK_a,			    spawn,		SHCMD(vixs) },
 
 	{ MODKEY|ShiftMask,           	XK_Return,		    zoom,		{0} },
 	{ MODKEY|ShiftMask,             XK_s,			    togglesticky,	{0} },
@@ -128,12 +113,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_l,			    spawn,		SHCMD("slock") },
 	{ MODKEY|ShiftMask,		XK_q,			    spawn,		SHCMD("say logout") },
 	{ MODKEY|ShiftMask,		XK_b,			    spawn,		SHCMD("qutebrowser") },
-	{ MODKEY|ShiftMask,		XK_n,			    spawn,		SHCMD("jpg2ff < ~/MEGA/WallHaven/`ls ~/MEGA/WallHaven \
-											      | shuf -n 1` > ~/.cache/st_bg.ff; \
-											      say refstbg; pidof st | xargs kill -s USR1") },
-	{ MODKEY|ShiftMask,		XK_m,			    spawn,		SHCMD("jpg2ff < ~/MEGA/wallhaven/`ls ~/MEGA/wallhaven \
-											      | shuf -n 1` > ~/.cache/st_bg.ff; \
-											      say refstbg; pidof st | xargs kill -s USR1") },
 	{ MODKEY|ControlMask,		XK_Print,		    spawn,		SHCMD("flameshot gui") }, 
 	{ MODKEY|ControlMask,	      	XK_Return,		    spawn,		SHCMD("say tmux; st -e tmux attach -t TMUX") },
 
@@ -162,7 +141,7 @@ static Button buttons[] = {
 };
 
 static Signal signals[] = {
-  { 1,  quit,             {0} },
-  { 2,  quit,		  {1} },
-  { 3,  cyclelayout,      {.i = -1 } },
+	{ 1,  quit,		{0} },
+	{ 2,  quit,		{1} },
+	{ 3,  cyclelayout,      {.i = -1 } },
 };
