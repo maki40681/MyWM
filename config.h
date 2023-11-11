@@ -71,7 +71,7 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
-static Key keys[] = {
+static const Key keys[] = {
 	{ 0,				XF86XK_AudioPrev,	    spawn,		SHCMD("playerctl prev") },
 	{ 0,				XF86XK_AudioNext,           spawn,		SHCMD("playerctl next") },
 	{ 0,				XF86XK_AudioPlay,           spawn,		SHCMD("playerctl play-pause") },
@@ -127,7 +127,7 @@ static Key keys[] = {
 	TAGKEYS(                      	XK_9,			    8)
 };
 
-static Button buttons[] = {
+static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        cyclelayout,	{.i = -1 } },
 	{ ClkLtSymbol,          0,              Button2,        killclient,	{0} },
 	{ ClkLtSymbol,          0,              Button3,        focusstack,	{.i = +1 } },

@@ -4,13 +4,7 @@ SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 PREFIX = ${HOME}/.local
 
-all: options dwm
-
-options:
-	@echo dwm build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+all: dwm
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
@@ -28,4 +22,4 @@ install: all
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options install
+.PHONY: all install
