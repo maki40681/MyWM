@@ -31,6 +31,8 @@ static const char col_gray1[]       	  = "#2d2d2d";
 static const char col_gray2[]       	  = "#747369";
 static const char col_gray3[]       	  = "#d3d0c8";
 static const char col_gray4[]       	  = "#2d2d2d";
+static const char scratchpadname[]	  = "scratchpad";
+static const char *scratchpadcmd[]	  = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "tmux", "attach", "-t", "TMUX", NULL };
 static const char *colors[][3] = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
@@ -102,6 +104,7 @@ static const Key keys[] = {
 	{ MODKEY,                     	XK_l,			    setmfact,		{.f = +0.05} },
 	{ MODKEY,			XK_Return,		    spawn,		SHCMD("st") },
 	{ MODKEY,			XK_q,			    spawn,		SHCMD("skippy-xd") },
+	{ MODKEY,                       XK_grave,		    togglescratch,	{.v = scratchpadcmd } },
 	{ MODKEY,			XK_space,		    spawn,		SHCMD("dmenu_run -h 24 -p \"debian  \"") },
 
 
