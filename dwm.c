@@ -389,6 +389,31 @@ applyrules(Client *c)
 		XFree(ch.res_class);
 	if (ch.res_name)
 		XFree(ch.res_name);
+
+
+	{
+		int format;
+		unsigned long *data, n, extra;
+		Monitor *m;
+		Atom atom;
+
+		if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False,
+				       XA_CARDINAL, &atom, &format, &n, &extra,
+				       (unsigned char **)&data) == Success &&
+		    n == 2) {
+
+			if (!c->tags) c->tags = *data;
+
+			for (m = mons; m; m = m->next) {
+				if (m->num == *(data + 1)) {
+					c->mon = m;
+					break;
+				}
+			}
+		}
+		if (n > 0) XFree(data);
+	}
+
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
 }
 
@@ -1447,25 +1472,6 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
-
-	{
-		int format;
-		unsigned long *data, n, extra;
-		Monitor *m;
-		Atom atom;
-		if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False, XA_CARDINAL,
-				&atom, &format, &n, &extra, (unsigned char **)&data) == Success && n == 2) {
-			c->tags = *data;
-			for (m = mons; m; m = m->next) {
-				if (m->num == *(data+1)) {
-					c->mon = m;
-					break;
-				}
-			}
-		}
-		if (n > 0)
-			XFree(data);
-	}
 	setclienttagprop(c);
 
 	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
