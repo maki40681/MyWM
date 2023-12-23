@@ -8,10 +8,14 @@
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
+
 static const int topbar			  = 1;
+static const int toptab			  = True;
 static const int showbar            	  = 1;
 static const int nmaster	    	  = 1;
-static const int user_bh            	  = 24;
+static const int user_bh            	  = 5;
+static const int showtab		  = showtab_auto;
 static const int showsystray        	  = 1;
 static const int resizehints	    	  = 0;
 static const int lockfullscreen	    	  = 1;
@@ -22,7 +26,7 @@ static const unsigned int gappx		  = 8;
 static const unsigned int borderpx	  = 3;
 static const unsigned int systrayonleft	  = 0;
 static const unsigned int systraypinning  = 0;
-static const unsigned int systrayspacing  = 5;
+static const unsigned int systrayspacing  = 2;
 
 static const float mfact		  = 0.55;
 
@@ -31,15 +35,10 @@ static const char col_gray1[]       	  = "#2d2d2d";
 static const char col_gray2[]       	  = "#747369";
 static const char col_gray3[]       	  = "#d3d0c8";
 static const char col_gray4[]       	  = "#2d2d2d";
-static const char scratchpadname[]	  = "scratchpad";
-static const char *scratchpadcmd[]	  = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "tmux", "attach", "-t", "TMUX", NULL };
 static const char *colors[][3] = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
-
-static const XPoint stickyiconbb = {4,8};
-static const XPoint stickyicon[] = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} };
 
 static const char *fonts[] = {
 	"Product Sans:size=11:antialias=true:autohint=true",
@@ -51,17 +50,22 @@ static const char *fonts[] = {
 
 static const char *const autostart[] = {
 	"lead", NULL,
+	"nm-applet", NULL,
 	"dwmblocks", NULL,
+	"jamesdsp", "-t", NULL,
 	NULL
 };
 
-static const char *tags[] = { " ", "", "", "", "", "   ","", "", "  " };
+static const char *tags[] = { "一", "二", "三", "四", "五", "六","七", "八", "九" };
 
 static const Rule rules[] = {
 	{ "Firefox-esr",	  NULL,	  NULL,   1 << 1,   0,  -1 },
+	{ "sioyek",		  NULL,	  NULL,   1 << 2,   0,  -1 },
 	{ "Zathura",		  NULL,	  NULL,   1 << 2,   0,  -1 },
 	{ "Master PDF Editor 5",  NULL,	  NULL,   1 << 2,   0,  -1 },
 	{ "mpv",		  NULL,	  NULL,   1 << 3,   0,  -1 },
+	{ "Spotify",		  NULL,	  NULL,   1 << 3,   0,  -1 },
+	{ "YouTube Music",	  NULL,	  NULL,   1 << 3,   0,  -1 },
 	{ "discord",		  NULL,	  NULL,   1 << 4,   0,  -1 },
 	{ "TelegramDesktop",	  NULL,	  NULL,   1 << 5,   0,  -1 },
 	{ "Gimp",		  NULL,	  NULL,   1 << 7,   0,  -1 },
@@ -88,6 +92,7 @@ static const Key keys[] = {
 	{ 0,			      	XK_Print,		    spawn,		SHCMD("maim -s | xclip -selection clipboard -t image/png") }, 
 
 	{ MODKEY,                     	XK_Tab,			    view,		{0} },
+	{ MODKEY,                       XK_t,			    tabmode,		{-1} },
 	{ MODKEY,                     	XK_b,			    togglebar,		{0} },
 	{ MODKEY,		      	XK_w,			    killclient,		{0} },
 	{ MODKEY,			XK_c,                       togglecenter,       {0} },
@@ -95,6 +100,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_f,			    togglefullscreen,	{0} },
 	{ MODKEY,                     	XK_j,			    focusstack,		{.i = +1 } },
 	{ MODKEY,                     	XK_k,			    focusstack,		{.i = -1 } },
+	{ MODKEY,                     	XK_bracketleft,		    focustab,		{.i = -1 } },
+	{ MODKEY,                     	XK_bracketright,	    focustab,		{.i = +1 } },
 	{ MODKEY,                     	XK_i,			    incnmaster,		{.i = +1 } },
 	{ MODKEY,                     	XK_d,			    incnmaster,		{.i = -1 } },
 	{ MODKEY,			XK_Left,                    cyclelayout,        {.i = +1 } },
@@ -103,21 +110,20 @@ static const Key keys[] = {
 	{ MODKEY,                     	XK_h,			    setmfact,		{.f = -0.05} },
 	{ MODKEY,                     	XK_l,			    setmfact,		{.f = +0.05} },
 	{ MODKEY,			XK_Return,		    spawn,		SHCMD("st") },
+	{ MODKEY,			XK_p,			    spawn,		SHCMD("sioyek") },
 	{ MODKEY,			XK_q,			    spawn,		SHCMD("skippy-xd") },
-	{ MODKEY,                       XK_grave,		    togglescratch,	{.v = scratchpadcmd } },
 	{ MODKEY,			XK_space,		    spawn,		SHCMD("dmenu_run -h 24 -p \"debian  \"") },
 
 
 	{ MODKEY|ShiftMask,           	XK_Return,		    zoom,		{0} },
-	{ MODKEY|ShiftMask,             XK_s,			    togglesticky,	{0} },
-	{ MODKEY|ShiftMask,             XK_Up,			    togglealwaysontop,	{0} },
 	{ MODKEY|ShiftMask,		XK_r,			    quit,		{1} },
 	{ MODKEY|ShiftMask,           	XK_0,			    tag,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_l,			    spawn,		SHCMD("slock") },
+	{ MODKEY|ShiftMask,		XK_b,			    spawn,		SHCMD("firefox") },
 	{ MODKEY|ShiftMask,		XK_q,			    spawn,		SHCMD("say logout") },
-	{ MODKEY|ShiftMask,		XK_b,			    spawn,		SHCMD("qutebrowser") },
-	{ MODKEY|ControlMask,		XK_Print,		    spawn,		SHCMD("flameshot gui") }, 
-	{ MODKEY|ControlMask,	      	XK_Return,		    spawn,		SHCMD("say tmux; st -e tmux attach -t TMUX") },
+	{ MODKEY|ShiftMask,		XK_s,			    spawn,		SHCMD("sleep 1; xset dpms force off") },
+	{ MODKEY|ControlMask,	      	XK_Return,		    spawn,		SHCMD("say tmux; st -t \"Suckless Terminal\" \
+												-e tmux attach -t TMUX") },
 
 	TAGKEYS(                      	XK_1,			    0)
 	TAGKEYS(                      	XK_2,			    1)
@@ -141,6 +147,7 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 
 static Signal signals[] = {
