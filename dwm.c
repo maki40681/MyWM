@@ -2267,8 +2267,7 @@ setfullscreen(Client *c, int fullscreen)
 			restack(c->mon);
 		} else
 			arrange(c->mon);
-	} else
-		resizeclient(c, c->x, c->y, c->w, c->h);
+	}
 
 	/* Exception: if the client was in actual fullscreen and we exit out to fake fullscreen
 	 * mode, then the focus would sometimes drift to whichever window is under the mouse cursor
