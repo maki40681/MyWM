@@ -30,14 +30,14 @@ static const unsigned int systrayspacing  = 2;
 
 static const float mfact		  = 0.55;
 
-static const char col_cyan[]		  = "#d3d0c8";
-static const char col_gray1[]       	  = "#2d2d2d";
-static const char col_gray2[]       	  = "#747369";
-static const char col_gray3[]       	  = "#d3d0c8";
-static const char col_gray4[]       	  = "#2d2d2d";
+static const char color0[]       	  = "#2d2d2d";
+static const char color8[]       	  = "#747369";
+static const char color7[]		  = "#d3d0c8";
+static const char color15[]		  = "#f2f0ec";
 static const char *colors[][3] = {
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { color0, color7,  color7 },
+	[SchemeNorm] = { color7, color0, color8 },
+	[SchemeTitle] = { color15, "#4d4c45", color15 },
 };
 
 static const char *fonts[] = {
@@ -50,6 +50,7 @@ static const char *fonts[] = {
 
 static const char *const autostart[] = {
 	"lead", NULL,
+	"dunst", NULL,
 	"nm-applet", NULL,
 	"dwmblocks", NULL,
 	"jamesdsp", "-t", NULL,
